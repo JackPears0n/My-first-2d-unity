@@ -11,22 +11,29 @@ public class PlayerTeleport : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentTeleporter != null)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            transform.position = currentTeleporter.GetComponent<Teleporter>().GetDestination().position;
-            Thread.Sleep(1);
+            if (currentTeleporter != null)
+            {
+                transform.position = currentTeleporter.GetComponent<Teleporter>().GetDestination().position;
+            }
         }
- 
+                
+
     }
 
     private void OnTriggerEnter2D(Collider2D colliosion)
     {
+        if (colliosion.CompareTag("VoidTeleporter"))
+        {
+            currentTeleporter = colliosion.gameObject;
+        }
         if (colliosion.CompareTag("Teleporter"))
         {
             currentTeleporter = colliosion.gameObject;
@@ -35,6 +42,13 @@ public class PlayerTeleport : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D colliosion)
     {
+        if (colliosion.CompareTag("VoidTeleporter"))
+        {
+            if (colliosion.gameObject == currentTeleporter)
+            {
+                currentTeleporter = null;
+            }
+        }
         if (colliosion.CompareTag("Teleporter"))
         {
             if (colliosion.gameObject == currentTeleporter)
@@ -44,3 +58,4 @@ public class PlayerTeleport : MonoBehaviour
         }
     }
 }
+
