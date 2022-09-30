@@ -71,17 +71,20 @@ public class Movement : MonoBehaviour
         }
 
         // check for attack input
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             anim.SetBool("attack", true);
         }
+        
+        
+        // check for attackflag
         if (isAttacking == true)
         {
             anim.SetBool("attack", true);
         }
         else
         {
-            anim.SetBool("attack", true);
+            anim.SetBool("attack", false);
         }
 
         // check for jumpflag
@@ -94,11 +97,7 @@ public class Movement : MonoBehaviour
             anim.SetBool("jump", false);
         }
 
-
         rb.velocity = vel;
-
-
-
 
     }
 
@@ -133,7 +132,7 @@ public class Movement : MonoBehaviour
         // check for player walking left
         if (Input.GetKey(KeyCode.A))
         {
-            isWalkingLeft = true;
+            isWalkingLeft = false;
         }
     }
 
@@ -142,14 +141,14 @@ public class Movement : MonoBehaviour
         // check for player walking right
         if (Input.GetKey(KeyCode.D))
         {
-            isWalkingRight = true;
+            isWalkingRight = false;
         }
     }
 
     void CheckForAttack()
     {
         // check for left mouse click
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             isAttacking = true;
         }
