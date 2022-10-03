@@ -47,28 +47,30 @@ public class Movement : MonoBehaviour
 
         // check for walk left button
         if (Input.GetKey(KeyCode.A))
-        {
-            vel.x = -3;
-            anim.SetBool("walk", true);
+                {
+                    vel.x = -3;
+                    anim.SetBool("walk", true);
            
-        }
+                }
 
         // check for walk right button
+
         if (Input.GetKey(KeyCode.D))
-        {
-            vel.x = 3;
-            anim.SetBool("walk", true);
-        }
-        
+                {
+                    vel.x = 3;
+                    anim.SetBool("walk", true);
+                }
+
         // check for jump button
         if (Input.GetKeyDown(KeyCode.W) && touchingPlatform )
-        {
-            isJumping=true;
+                {
+                    isJumping=true;
 
-            vel.y = 7;
-            anim.SetBool("walk", false);
+                    vel.y = 7;
+                    anim.SetBool("walk", false);
         
-        }
+                }
+        
 
         // check for attack input
         if (Input.GetMouseButton(0))
