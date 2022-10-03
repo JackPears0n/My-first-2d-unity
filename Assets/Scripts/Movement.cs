@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,7 +15,7 @@ public class Movement : MonoBehaviour
     bool isJumping;
     bool isWalkingLeft;
     bool isWalkingRight;
-    bool isAttacking;
+    int health;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,7 @@ public class Movement : MonoBehaviour
         isJumping = false;
         isWalkingLeft = false;
         isWalkingRight = false;
-        isAttacking = false;
+        health = 100;
     }
 
     // Update is called once per frame
@@ -37,25 +39,21 @@ public class Movement : MonoBehaviour
         CheckForLanding();
         CheckForWalkLeft();
         CheckForWalkRight();
-        CheckForAttack();
-
 
         Vector2 vel = rb.velocity;
         anim.SetBool("walk", false);
         anim.SetBool("jump", false);
-        anim.SetBool("attack", false);
 
         // check for walk left button
         if (Input.GetKey(KeyCode.A))
                 {
                     vel.x = -3;
                     anim.SetBool("walk", true);
-           
                 }
 
         // check for walk right button
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                 {
                     vel.x = 3;
                     anim.SetBool("walk", true);
@@ -65,32 +63,12 @@ public class Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && touchingPlatform )
                 {
                     isJumping=true;
-
                     vel.y = 7;
                     anim.SetBool("walk", false);
-        
                 }
-        
-
-        // check for attack input
-        if (Input.GetMouseButton(0))
-        {
-            anim.SetBool("attack", true);
-        }
-        
-        
-        // check for attackflag
-        if (isAttacking == true)
-        {
-            anim.SetBool("attack", true);
-        }
-        else
-        {
-            anim.SetBool("attack", false);
-        }
 
         // check for jumpflag
-        if( isJumping==true)
+        if (isJumping == true)
         {
             anim.SetBool("jump", true);
         }
@@ -98,6 +76,7 @@ public class Movement : MonoBehaviour
         {
             anim.SetBool("jump", false);
         }
+
 
         rb.velocity = vel;
 
@@ -147,15 +126,14 @@ public class Movement : MonoBehaviour
         }
     }
 
-    void CheckForAttack()
+    // destroy object
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        // check for left mouse click
-        if (Input.GetMouseButton(0))
+        if (collision.gameObject.tag == "coin")
         {
-            isAttacking = true;
+            Destroy(collision.gameObject);
         }
     }
-
 }
 
 

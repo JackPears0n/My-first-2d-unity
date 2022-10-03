@@ -461,8 +461,8 @@ TextureImporter:
       name: hk_idle1
       rect:
         serializedVersion: 2
-        x: 118
-        y: 443
+        x: 119
+        y: 442
         width: 44
         height: 40
       alignment: 8
@@ -815,7 +815,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeroKnight_18
+      name: hk_attack1_0
       rect:
         serializedVersion: 2
         x: 821
@@ -836,7 +836,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeroKnight_19
+      name: hk_attack1_1
       rect:
         serializedVersion: 2
         x: 935
@@ -857,13 +857,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeroKnight_20
+      name: hk_attack1_2
       rect:
         serializedVersion: 2
         x: 22
-        y: 333
+        y: 332
         width: 75
-        height: 49
+        height: 50
       alignment: 8
       pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -878,11 +878,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeroKnight_22
+      name: hk_attack1_3
       rect:
         serializedVersion: 2
-        x: 122
-        y: 332
+        x: 125
+        y: 333
         width: 49
         height: 39
       alignment: 8
@@ -899,7 +899,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeroKnight_23
+      name: hk_attack1_4
       rect:
         serializedVersion: 2
         x: 225
@@ -920,7 +920,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeroKnight_24
+      name: hk_attack1_5
       rect:
         serializedVersion: 2
         x: 335
@@ -941,7 +941,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeroKnight_25
+      name: hk_attack2_0
       rect:
         serializedVersion: 2
         x: 435
@@ -2335,7 +2335,7 @@ TextureImporter:
         width: 29
         height: 45
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2361,18 +2361,19 @@ TextureImporter:
       HeroKnight_72: 21300144
       HeroKnight_87: 21300174
       HeroKnight_35: 21300070
+      hk_attack1_0: 21300036
       HeroKnight_64: 21300128
       hk_idle1: 21300002
+      hk_attack2_0: 21300050
       hk_idle7: 21300014
       HeroKnight_88: 21300176
       HeroKnight_92: -332987936
       HeroKnight_36: 21300072
-      HeroKnight_25: 21300050
+      hk_attack1_4: 21300046
       HeroKnight_34: 21300068
       HeroKnight_77: 21300154
       HeroKnight_28: 21300056
       hk_jump4: 21300092
-      HeroKnight_24: 21300048
       HeroKnight_80: 21300160
       HeroKnight_90: -1683706482
       HeroKnight_32: 21300064
@@ -2395,30 +2396,31 @@ TextureImporter:
       HeroKnight_74: 21300148
       hk_jump1: 21300086
       hk_jump6: 21300096
+      hk_attack1_2: 21300040
       HeroKnight_84: 21300168
+      hk_attack1_3: 21300044
       HeroKnight_29: 21300058
       HeroKnight_83: 21300166
       hk_idle2: 21300004
       HeroKnight_65: 21300130
+      hk_attack1_5: 21300048
       hk_walk6: 21300030
       HeroKnight_61: 21300122
       HeroKnight_59: 21300118
       HeroKnight_62: 21300124
       HeroKnight_21: 21300042
-      HeroKnight_20: 21300040
       HeroKnight_41: 21300082
       HeroKnight_81: 21300162
       HeroKnight_76: 21300152
       HeroKnight_69: 21300138
+      hk_attack1_1: 21300038
       hk_idle3: 21300006
       HeroKnight_75: 21300150
-      HeroKnight_19: 21300038
       HeroKnight_60: 21300120
       hk_walk4: 21300026
       HeroKnight_93: -984734800
       HeroKnight_50: 21300100
       hk_jump0: 21300084
-      HeroKnight_18: 21300036
       HeroKnight_78: 21300156
       HeroKnight_40: 21300080
       HeroKnight_91: 567192467
@@ -2435,7 +2437,6 @@ TextureImporter:
       HeroKnight_30: 21300060
       hk_idle0: 21300000
       hk_jump2: 21300088
-      HeroKnight_22: 21300044
       HeroKnight_54: 21300108
       hk_jump3: 21300090
       HeroKnight_9: 21300018
@@ -2451,7 +2452,6 @@ TextureImporter:
       HeroKnight_33: 21300066
       HeroKnight_73: 21300146
       hk_idle5: 21300010
-      HeroKnight_23: 21300046
       HeroKnight_86: 21300172
   spritePackingTag: 
   pSDRemoveMatte: 0
