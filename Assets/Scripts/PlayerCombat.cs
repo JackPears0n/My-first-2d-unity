@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerCombat : MonoBehaviour
     public Transform attackPoint;
     public float attackRange = 0.5F;
     public LayerMask enemyLayers;
+    public int attackDamage = 40;
 
     void Update()
     {
@@ -31,7 +33,10 @@ public class PlayerCombat : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("We hit " + enemy.name);
+            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
         }
+
+        Thread.Sleep(1);
     }
 
     void OnDrawGizmosSelected()

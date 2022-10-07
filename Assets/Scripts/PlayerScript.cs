@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 
-public class Movement : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
     Rigidbody2D rb;
     public float speed;
     public bool touchingPlatform;
     private Animator anim;
     bool isJumping;
-    bool isWalkingLeft;
-    bool isWalkingRight;
     int health;
+    HelperScript helper;
+    bool alive;
+    public GameObject projectile;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +27,10 @@ public class Movement : MonoBehaviour
         speed = 5.5F;
         touchingPlatform = false;
         anim = GetComponent<Animator>();
-
         isJumping = false;
-        isWalkingLeft = false;
-        isWalkingRight = false;
         health = 100;
+        alive = true;
+        helper = gameObject.AddComponent<HelperScript>();
     }
 
     // Update is called once per frame
@@ -37,19 +38,53 @@ public class Movement : MonoBehaviour
     {
 
         CheckForLanding();
-        CheckForWalkLeft();
-        CheckForWalkRight();
 
         Vector2 vel = rb.velocity;
         anim.SetBool("walk", false);
         anim.SetBool("jump", false);
 
+        if (health <= 0)
+        {
+            alive = false;
+        }
+
+        int moveDirection = 1;
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.F))
+        {
+            // Instantiate the bullet at the position and rotation of the player
+            GameObject clone;
+            clone = Instantiate(projectile);
+
+            // get the rigidbody component
+            Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
+
+            // set the velocity
+            rb.velocity = new Vector3(15 * moveDirection, 0, 0);
+
+            // set the position close to the player
+            rb.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+
+            Thread.Sleep(1);
+        }
+
         // check for walk left button
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
                 {
                     vel.x = -3;
                     anim.SetBool("walk", true);
                 }
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+            helper.FlipObject(true);    // this will execute the method in HelperScript.cs
+
+            }
+
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            helper.FlipObject(false);    // this will execute the method in HelperScript.cs
+
+        }
 
         // check for walk right button
 
@@ -60,7 +95,7 @@ public class Movement : MonoBehaviour
                 }
 
         // check for jump button
-        if (Input.GetKeyDown(KeyCode.W) && touchingPlatform )
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && touchingPlatform )
                 {
                     isJumping=true;
                     vel.y = 7;
@@ -105,24 +140,6 @@ public class Movement : MonoBehaviour
         if ((isJumping == true) && touchingPlatform && rb.velocity.y <= 0)
         {
             isJumping = false;
-        }
-    }
-
-    void CheckForWalkLeft()
-    {
-        // check for player walking left
-        if (Input.GetKey(KeyCode.A))
-        {
-            isWalkingLeft = false;
-        }
-    }
-
-    void CheckForWalkRight()
-    {
-        // check for player walking right
-        if (Input.GetKey(KeyCode.D))
-        {
-            isWalkingRight = false;
         }
     }
 

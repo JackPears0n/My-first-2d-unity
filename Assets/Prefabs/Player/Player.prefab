@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5.5
   touchingPlatform: 0
+  projectile: {fileID: 0}
 --- !u!114 &4203546106759000238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +230,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 0
+  attackDamage: 40
 --- !u!1 &4203546107892510642
 GameObject:
   m_ObjectHideFlags: 0
