@@ -2042,7 +2042,7 @@ GameObject:
   - component: {fileID: 1236297017}
   - component: {fileID: 1236297016}
   - component: {fileID: 1236297015}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spawn platform
   m_TagString: Platform
   m_Icon: {fileID: 0}

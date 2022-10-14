@@ -5,6 +5,7 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class PlayerScript : MonoBehaviour
@@ -18,6 +19,7 @@ public class PlayerScript : MonoBehaviour
     HelperScript helper;
     bool alive;
     public GameObject projectile;
+    bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,7 @@ public class PlayerScript : MonoBehaviour
         speed = 5.5F;
         touchingPlatform = false;
         anim = GetComponent<Animator>();
-        isJumping = false;
+        //isJumping = false;
         health = 100;
         alive = true;
         helper = gameObject.AddComponent<HelperScript>();
@@ -37,9 +39,10 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
 
-        CheckForLanding();
         helper.DoRayCollisionCheck();
+        Shoot();
 
+        isGrounded = helper.DoRayCollisionCheck();
         Vector2 vel = rb.velocity;
         anim.SetBool("walk", false);
         anim.SetBool("jump", false);
@@ -47,9 +50,75 @@ public class PlayerScript : MonoBehaviour
         if (health <= 0)
         {
             alive = false;
+        }        
+
+        // check for walk left button
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            vel.x = -3;
+            helper.FlipObject(true);    // this will execute the method in HelperScript.cs
+            anim.SetBool("walk", true);
         }
 
+        // check for walk right button
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            vel.x = 3;
+            helper.FlipObject(false);    // this will execute the method in HelperScript.c
+            anim.SetBool("walk", true);
+        }
+
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && (isGrounded == true))
+        {
+            isJumping = true;
+            vel.y = 7;
+            if (isJumping == true)
+            {
+                anim.SetBool("jump", true);
+            }
+            else
+            {
+                anim.SetBool("jump", false);
+            }
+        }
+
+        /*
+        // check for jump button
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && (isGrounded == true))
+        {
+            isJumping=true;
+            vel.y = 7;
+            anim.SetBool("walk", false);
+        }
+
+        // check for jumpflag
+        if (isJumping == true)
+        {
+            anim.SetBool("jump", true);
+        }
+        else
+        {
+            anim.SetBool("jump", false);
+        }
+        */
+        rb.velocity = vel;
+        
+    }
+
+
+    // destroy object
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "coin")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
+    void Shoot()
+    {
         int moveDirection = 1;
+
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.F))
         {
             // Instantiate the bullet at the position and rotation of the player
@@ -66,90 +135,6 @@ public class PlayerScript : MonoBehaviour
             rb.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 
             Thread.Sleep(1);
-        }
-
-        // check for walk left button
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-                {
-                    vel.x = -3;
-                    anim.SetBool("walk", true);
-                }
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            {
-            helper.FlipObject(true);    // this will execute the method in HelperScript.cs
-
-            }
-
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            helper.FlipObject(false);    // this will execute the method in HelperScript.cs
-
-        }
-
-        // check for walk right button
-
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-                {
-                    vel.x = 3;
-                    anim.SetBool("walk", true);
-                }
-
-        // check for jump button
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && touchingPlatform )
-                {
-                    isJumping=true;
-                    vel.y = 7;
-                    anim.SetBool("walk", false);
-                }
-
-        // check for jumpflag
-        if (isJumping == true)
-        {
-            anim.SetBool("jump", true);
-        }
-        else
-        {
-            anim.SetBool("jump", false);
-        }
-
-
-        rb.velocity = vel;
-
-    }
-
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Platform")
-        {
-            touchingPlatform = true;
-        }
-    }
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Platform")
-        {
-            touchingPlatform = false;
-        }
-    }
-
-
-    void CheckForLanding()
-    {
-        // check for player landing on a platform
-        if ((isJumping == true) && touchingPlatform && rb.velocity.y <= 0)
-        {
-            isJumping = false;
-        }
-    }
-
-    // destroy object
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "coin")
-        {
-            Destroy(collision.gameObject);
         }
     }
 }
