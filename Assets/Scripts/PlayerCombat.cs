@@ -12,6 +12,11 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayers;
     public int attackDamage = 40;
 
+    void Start()
+    {
+        enemyLayers = LayerMask.GetMask("Enemies");
+    }
+
     void Update()
     {
       if (Input.GetMouseButtonDown(0))

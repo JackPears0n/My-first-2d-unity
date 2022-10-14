@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+
         float xDifference = player.transform.position.x - transform.position.x;
         Debug.Log(xDifference);
         float yDifference = player.transform.position.y - transform.position.y;

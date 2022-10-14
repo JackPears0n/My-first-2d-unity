@@ -212,5 +212,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  player: {fileID: 0}
+  player: {fileID: 4203546106759000235, guid: 95775c2e6f0890d41ac7fa87c1628f68, type: 3}
   enemyProjectile: {fileID: 0}
