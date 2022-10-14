@@ -10,6 +10,7 @@ TagManager:
   - VoidTeleporter
   - Teleporter
   - coin
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Obstacle
   - Enemies
   - Test
-  - 
+  - Floor
   - 
   - 
   - 

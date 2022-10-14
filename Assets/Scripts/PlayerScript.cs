@@ -38,6 +38,7 @@ public class PlayerScript : MonoBehaviour
     {
 
         CheckForLanding();
+        helper.DoRayCollisionCheck();
 
         Vector2 vel = rb.velocity;
         anim.SetBool("walk", false);
